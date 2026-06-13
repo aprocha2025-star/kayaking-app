@@ -144,14 +144,12 @@
 <div id="app">
 
   <nav class="nav" id="main-nav">
-    <!-- Guest sees nothing here; organiser sees tabs after secret unlock -->
     <div class="nav-tabs" id="nav-tabs" style="display:none">
       <button class="nav-tab active" onclick="switchTab('guest',this)">Register</button>
       <button class="nav-tab" onclick="switchTab('r1',this)">5-Day</button>
       <button class="nav-tab" onclick="switchTab('r2',this)">Night Before</button>
       <button class="nav-tab" onclick="switchTab('organiser',this)">Organiser</button>
     </div>
-    <!-- Invisible organiser trigger — triple-tap the nav bar -->
     <button class="nav-organiser-btn" id="org-btn" onclick="orgTap()">·</button>
   </nav>
 
@@ -199,10 +197,16 @@
       </div>
       <div class="card">
         <div class="card-label">Reserve your spot</div>
-        <p style="font-size:13px;color:#666;line-height:1.6;margin-bottom:16px">This is a positive confirmation event. After registering you'll be asked to reconfirm 5 days before and the night before. Unconfirmed spots may be released to the waitlist.</p>
-        <a href="https://buytickets.at/sandhoflily/2264556" target="_blank" style="text-decoration:none">
-          <button class="btn-primary">🛶 Reserve my spot</button>
-        </a>
+        <div class="form-group">
+          <label class="form-label">Full name</label>
+          <input class="form-input" type="text" id="reg-name" placeholder="Your name" autocomplete="name">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email address</label>
+          <input class="form-input" type="email" id="reg-email" placeholder="you@email.com" autocomplete="email">
+        </div>
+        <button class="btn-primary" id="reg-btn" onclick="submitReg()">🛶 Reserve my spot</button>
+        <p class="note">This is a positive confirmation event. You'll be asked to reconfirm 5 days before and the night before. Unconfirmed spots may be released to the waitlist.</p>
       </div>
       <div class="spacer-lg"></div>
     </div>
@@ -356,15 +360,48 @@
     window.scrollTo(0, 0);
   }
 
-  function submitReg() {
+  async function submitReg() {
     const name = document.getElementById('reg-name').value.trim();
     const email = document.getElementById('reg-email').value.trim();
     if (!name) { alert('Please enter your name.'); return; }
     if (!email || !email.includes('@')) { alert('Please enter a valid email address.'); return; }
-    document.getElementById('reg-firstname').textContent = name.split(' ')[0];
-    document.getElementById('reg-form').style.display = 'none';
-    document.getElementById('reg-success').style.display = 'block';
-    window.scrollTo(0, 0);
+
+    const btn = document.getElementById('reg-btn');
+    btn.textContent = 'Reserving your spot...';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch('/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email })
+      });
+      const data = await res.json();
+
+      if (data.error === 'sold_out') {
+        btn.textContent = '🛶 Reserve my spot';
+        btn.disabled = false;
+        alert('Sorry, this event is now full. Please contact the organiser to join the waitlist.');
+        return;
+      }
+
+      if (!res.ok) {
+        btn.textContent = '🛶 Reserve my spot';
+        btn.disabled = false;
+        alert('Something went wrong. Please try again.');
+        return;
+      }
+
+      document.getElementById('reg-firstname').textContent = name.split(' ')[0];
+      document.getElementById('reg-form').style.display = 'none';
+      document.getElementById('reg-success').style.display = 'block';
+      window.scrollTo(0, 0);
+
+    } catch (err) {
+      btn.textContent = '🛶 Reserve my spot';
+      btn.disabled = false;
+      alert('Something went wrong. Please try again.');
+    }
   }
 
   function showR1Success() {
