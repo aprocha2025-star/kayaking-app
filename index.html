@@ -316,6 +316,8 @@
     if (token === GUEST_TOKEN || token === ORG_TOKEN) {
       document.getElementById('gate').style.display = 'none';
       document.getElementById('app').style.display = 'block';
+      if(new URLSearchParams(window.location.search).get('screen')==='r1'){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('screen-r1').classList.add('active');}
+if(new URLSearchParams(window.location.search).get('screen')==='r2'){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('screen-r2').classList.add('active');}
       if (token === ORG_TOKEN) {
         document.getElementById('nav-tabs').style.display = 'flex';
       }
