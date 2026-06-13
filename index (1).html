@@ -51,6 +51,18 @@
   .hero-pills { display: flex; gap: 8px; flex-wrap: wrap; }
   .hero-pill { display: inline-flex; align-items: center; gap: 5px; background: rgba(20,40,30,0.72); backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; padding: 6px 14px; font-size: 13px; color: white; font-weight: 500; }
 
+  /* EVENT CONTENT */
+  .event-tagline { font-family: 'DM Serif Display', serif; font-size: 20px; color: var(--moss); margin-bottom: 8px; }
+  .event-description { font-size: 13px; color: #666; line-height: 1.65; margin-bottom: 10px; }
+  .bring-list { display: flex; flex-direction: column; gap: 10px; }
+  .bring-item { font-size: 13px; color: var(--bark); display: flex; align-items: flex-start; gap: 8px; line-height: 1.4; }
+  .notice-card { background: #FFFBF0; border: 1px solid rgba(214,137,16,0.2); }
+  .notice-row { display: flex; align-items: flex-start; gap: 8px; font-size: 12px; color: #666; line-height: 1.55; }
+
+  /* EVENT PILLS IN CARD */
+  .event-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+  .event-pill { display: inline-flex; align-items: center; gap: 5px; background: var(--mist); border: 1px solid rgba(45,106,79,0.15); border-radius: 20px; padding: 6px 12px; font-size: 12px; color: var(--bark); font-weight: 500; }
+
   /* CARDS */
   .card { background: white; border-radius: 18px; padding: 20px; margin: 16px 16px 0; box-shadow: 0 2px 12px rgba(45,106,79,0.07); }
   .card-label { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--moss); margin-bottom: 14px; }
@@ -147,20 +159,44 @@
     <div id="reg-form">
       <div class="hero-img">
         <img src="hero.png" alt="TD Women in Tech Kayaking Excursion — Connect. Paddle. Inspire.">
-        <div class="hero-overlay">
-          <div class="hero-pills">
-            <span class="hero-pill">📅 June 22, 2026</span>
-            <span class="hero-pill">⏰ 9:30 – 12:30 PM</span>
-            <span class="hero-pill">📍 Cherry Beach</span>
-          </div>
-        </div>
+
       </div>
       <div class="card">
-        <div class="card-label">Event details</div>
-        <div class="detail-row"><span class="detail-icon">🧭</span><div><div class="detail-main">Guide: Lawrence Warriner</div><div class="detail-sub">Toward Biidaasigie Park or the Toronto Islands</div></div></div>
-        <div class="detail-row"><span class="detail-icon">🌊</span><div><div class="detail-main">Beginner-friendly</div><div class="detail-sub">Kayaks & safety equipment provided · Certified lifeguard on water</div></div></div>
-        <div class="detail-row"><span class="detail-icon">📍</span><div><div class="detail-main">DMWTD Kayak Containers</div><div class="detail-sub">East end of Cherry Beach parking lot · 1 Cherry Street</div></div></div>
-        <div class="detail-row"><span class="detail-icon">🎟️</span><div><div class="detail-main">Free · 22 spots · Private invite only</div></div></div>
+        <div class="event-pills">
+          <span class="event-pill">📅 June 22, 2026</span>
+          <span class="event-pill">⏰ 9:30 – 12:30 PM</span>
+          <span class="event-pill">📍 Cherry Beach</span>
+        </div>
+        <div class="event-tagline">Connect. Paddle. Inspire.</div>
+        <div class="event-description">Join TD employees, Women in Tech interns, and friends for a morning of kayaking, conversation, and community on Toronto's waterfront.</div>
+        <div class="event-description">We'll launch from Cherry Beach for a guided kayak journey with Lawrence Warriner, exploring Toronto's waterfront ecology, wildlife, and hidden natural beauty from the water — heading toward Biidaasigie Park or the Toronto Islands. Along the way, please feel free to collect any garbage we see floating in the water to help keep our shared waterways clean. All tools provided.</div>
+        <div class="card-label" style="margin-top:16px">Event details</div>
+        <div class="detail-row"><span class="detail-icon">🛶</span><div><div class="detail-main">Guided Kayaking on Toronto's Waterfront</div></div></div>
+        <div class="detail-row"><span class="detail-icon">🧭</span><div><div class="detail-main">Guide: Lawrence Warriner</div></div></div>
+        <div class="detail-row"><span class="detail-icon">🗓️</span><div><div class="detail-main">June 22 · 9:30 a.m. – 12:30 p.m.</div><div class="detail-sub">Check-in: 9:30 a.m.</div></div></div>
+        <div class="detail-row"><span class="detail-icon">📍</span><div><div class="detail-main">Cherry Beach</div><div class="detail-sub">1 Cherry Street, Toronto, ON M5A 1A1</div></div></div>
+        <div class="detail-row"><span class="detail-icon">📌</span><div><div class="detail-main">Meet at DMWTD Kayak Containers</div><div class="detail-sub">East end of Cherry Beach parking lot — containers closest to the shore</div></div></div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">Kayaking experience</div>
+        <div class="event-description">Beginner-friendly. Participants will paddle in a relaxed group setting with plenty of opportunities for conversation throughout the journey. Kayaks and safety equipment are provided. A certified lifeguard will be paddling with the group.</div>
+      </div>
+
+      <div class="card">
+        <div class="card-label">What to bring</div>
+        <div class="bring-list">
+          <div class="bring-item">👕 Comfortable clothing suitable for paddling</div>
+          <div class="bring-item">💧 Water bottle</div>
+          <div class="bring-item">🧴 Sunscreen, bug spray and hat</div>
+          <div class="bring-item">🧺 Small towel if desired</div>
+          <div class="bring-item">👟 Comfortable footwear that can get wet</div>
+        </div>
+      </div>
+
+      <div class="card notice-card">
+        <div class="notice-row">⚠️ <span><strong>Reconfirmation required.</strong> You'll be asked to confirm attendance 5 days before and the night before. Unconfirmed spots may be offered to the waitlist.</span></div>
+        <div class="notice-row" style="margin-top:10px">🌧️ <span>If severe weather occurs, participants will be contacted using the email provided during registration.</span></div>
       </div>
       <div class="card">
         <div class="card-label">Reserve your spot</div>
