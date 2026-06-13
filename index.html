@@ -51,6 +51,10 @@
   .hero-pills { display: flex; gap: 8px; flex-wrap: wrap; }
   .hero-pill { display: inline-flex; align-items: center; gap: 5px; background: rgba(20,40,30,0.72); backdrop-filter: blur(6px); border: 1px solid rgba(255,255,255,0.2); border-radius: 20px; padding: 6px 14px; font-size: 13px; color: white; font-weight: 500; }
 
+  /* EVENT PILLS IN CARD */
+  .event-pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+  .event-pill { display: inline-flex; align-items: center; gap: 5px; background: var(--mist); border: 1px solid rgba(45,106,79,0.15); border-radius: 20px; padding: 6px 12px; font-size: 12px; color: var(--bark); font-weight: 500; }
+
   /* CARDS */
   .card { background: white; border-radius: 18px; padding: 20px; margin: 16px 16px 0; box-shadow: 0 2px 12px rgba(45,106,79,0.07); }
   .card-label { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--moss); margin-bottom: 14px; }
@@ -147,15 +151,14 @@
     <div id="reg-form">
       <div class="hero-img">
         <img src="hero.png" alt="TD Women in Tech Kayaking Excursion — Connect. Paddle. Inspire.">
-        <div class="hero-overlay">
-          <div class="hero-pills">
-            <span class="hero-pill">📅 June 22, 2026</span>
-            <span class="hero-pill">⏰ 9:30 – 12:30 PM</span>
-            <span class="hero-pill">📍 Cherry Beach</span>
-          </div>
-        </div>
+
       </div>
       <div class="card">
+        <div class="event-pills">
+          <span class="event-pill">📅 June 22, 2026</span>
+          <span class="event-pill">⏰ 9:30 – 12:30 PM</span>
+          <span class="event-pill">📍 Cherry Beach</span>
+        </div>
         <div class="card-label">Event details</div>
         <div class="detail-row"><span class="detail-icon">🧭</span><div><div class="detail-main">Guide: Lawrence Warriner</div><div class="detail-sub">Toward Biidaasigie Park or the Toronto Islands</div></div></div>
         <div class="detail-row"><span class="detail-icon">🌊</span><div><div class="detail-main">Beginner-friendly</div><div class="detail-sub">Kayaks & safety equipment provided · Certified lifeguard on water</div></div></div>
