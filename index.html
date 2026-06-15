@@ -326,10 +326,27 @@
   }
 
   function submitToGoogle(formId, fields){
-    const url='https://docs.google.com/forms/d/e/'+formId+'/formResponse';
-    const data=new FormData();
-    Object.entries(fields).forEach(([k,v])=>data.append(k,v));
-    fetch(url,{method:'POST',body:data,mode:'no-cors'}).catch(()=>{});
+    const iframe=document.createElement('iframe');
+    iframe.style.display='none';
+    iframe.name='hidden_iframe_'+Date.now();
+    document.body.appendChild(iframe);
+    const form=document.createElement('form');
+    form.method='POST';
+    form.action='https://docs.google.com/forms/d/e/'+formId+'/formResponse';
+    form.target=iframe.name;
+    Object.entries(fields).forEach(([k,v])=>{
+      const input=document.createElement('input');
+      input.type='hidden';
+      input.name=k;
+      input.value=v;
+      form.appendChild(input);
+    });
+    document.body.appendChild(form);
+    form.submit();
+    setTimeout(()=>{
+      document.body.removeChild(form);
+      document.body.removeChild(iframe);
+    },3000);
   }
 
   async function submitReg(){
