@@ -344,6 +344,11 @@
       'entry.928657862': name,
       'entry.1349659481': email
     });
+    fetch('/api/register',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({name,email})
+    }).catch(()=>{});
     document.getElementById('reg-firstname').textContent=name.split(' ')[0];
     document.getElementById('reg-form').style.display='none';
     document.getElementById('reg-success').style.display='block';
