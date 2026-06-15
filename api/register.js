@@ -1,4 +1,3 @@
-// api/register.js — Vercel serverless function
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -10,30 +9,17 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Name and email are required' });
   }
 
-  const formId = '1FAIpQLSdN31zrkETP1W8qv8SeRWGZU2wi2b0NXc-pb7gpw4BuHIvNgg';
-  const formUrl = `https://docs.google.com/forms/d/e/${formId}/formResponse`;
-
-  const body = new URLSearchParams({
-  'emailAddress': email,
-  'entry.928657862': name,
-});
-
   try {
-    const response = await fetch(formUrl, {
+    const response = await fetch('https://script.google.com/macros/s/AKfycbwMhPk2yszqrT1uzCIdn0h8GbBJTonZ8PcqFeff7VdVRgnNzKk22hasUbNT2vTME_Uq0w/exec', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: body.toString(),
-      redirect: 'manual', // Google Forms redirects on success — that's fine
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email }),
     });
 
-    // Google Forms returns a 200 or 302 on success
-    if (response.status === 200 || response.status === 302) {
-      return res.status(200).json({ success: true });
-    } else {
-      return res.status(500).json({ error: `Unexpected status: ${response.status}` });
-    }
+    const data = await response.json();
+    return res.status(200).json({ success: true });
   } catch (err) {
-    console.error('Google Forms submission error:', err);
+    console.error('Error:', err);
     return res.status(500).json({ error: 'Submission failed' });
   }
 }
