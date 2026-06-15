@@ -326,27 +326,13 @@
   }
 
   function submitToGoogle(formId, fields){
-    const iframe=document.createElement('iframe');
-    iframe.style.display='none';
-    iframe.name='hidden_iframe_'+Date.now();
-    document.body.appendChild(iframe);
-    const form=document.createElement('form');
-    form.method='POST';
-    form.action='https://docs.google.com/forms/d/e/'+formId+'/formResponse';
-    form.target=iframe.name;
-    Object.entries(fields).forEach(([k,v])=>{
-      const input=document.createElement('input');
-      input.type='hidden';
-      input.name=k;
-      input.value=v;
-      form.appendChild(input);
-    });
-    document.body.appendChild(form);
-    form.submit();
-    setTimeout(()=>{
-      document.body.removeChild(form);
-      document.body.removeChild(iframe);
-    },3000);
+    const params=new URLSearchParams(fields);
+    fetch('https://docs.google.com/forms/d/e/'+formId+'/formResponse',{
+      method:'POST',
+      headers:{'Content-Type':'application/x-www-form-urlencoded'},
+      body:params.toString(),
+      mode:'no-cors'
+    }).catch(()=>{});
   }
 
   async function submitReg(){
@@ -357,10 +343,6 @@
     const btn=document.getElementById('reg-btn');
     btn.textContent='Reserving your spot...';
     btn.disabled=true;
-    submitToGoogle('1FAIpQLSdN31zrkETP1W8qv8SeRWGZU2wi2b0NXc-pb7gpw4BuHIvNgg',{
-      'entry.928657862': name,
-      'entry.1349659481': email
-    });
     fetch('/api/register',{
       method:'POST',
       headers:{'Content-Type':'application/json'},
