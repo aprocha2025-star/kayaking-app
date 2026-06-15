@@ -219,7 +219,7 @@
     <div id="r1-form">
       <div class="hero-img" style="max-height:280px"><img src="hero.png" alt="" style="object-position:center top"><div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(30,77,56,0.7) 0%,transparent 100%);display:flex;align-items:flex-end;padding:24px 20px"><div><div style="font-family:'DM Serif Display',serif;font-size:24px;color:white;margin-bottom:4px">Still joining us?</div><div style="font-size:13px;color:rgba(255,255,255,0.85)">We're 5 days away from the water 🛶</div></div></div></div>
       <div class="reconfirm-banner" style="background:linear-gradient(135deg,var(--water),var(--water-mid))">
-        <h3>Hi 👋</h3>
+        <h3>Hi [Name] 👋</h3>
         <p>June 22nd is almost here! We'd love to know you're still in. One tap is all it takes — if we don't hear back by end of day June 18, your spot may be offered to someone on the waitlist.</p>
         <div class="deadline-pill">🗓 Confirm by: June 18, end of day</div>
       </div>
@@ -255,6 +255,7 @@
       <div class="reconfirm-banner" style="background:linear-gradient(135deg,#0D2137,var(--water))">
         <h3>Almost time! 🛶</h3>
         <p>Tomorrow's the day — we're so excited. Just a quick final confirmation so we can finalize the group. If something's come up, please let us know so we can offer your spot.</p>
+        <div class="deadline-pill">⏰ Tonight only</div>
       </div>
       <div class="card">
         <div class="card-label">Tomorrow morning</div>
@@ -318,8 +319,6 @@
       if (token === ORG_TOKEN) {
         document.getElementById('nav-tabs').style.display = 'flex';
       }
-      if(new URLSearchParams(window.location.search).get('screen')==='r1'){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('screen-r1').classList.add('active');}
-if(new URLSearchParams(window.location.search).get('screen')==='r2'){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById('screen-r2').classList.add('active');}
     }
   }
   checkAccess();
@@ -353,7 +352,7 @@ if(new URLSearchParams(window.location.search).get('screen')==='r2'){document.qu
     btn.disabled = true;
 
     try {
-      const res = await fetch('https://kayaking-app.vercel.app/api/register'
+      const res = await fetch('/api/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email })
@@ -389,6 +388,17 @@ if(new URLSearchParams(window.location.search).get('screen')==='r2'){document.qu
     document.getElementById('r2-form').style.display = 'none';
     document.getElementById('r2-success').style.display = 'block';
     window.scrollTo(0, 0);
+  }
+
+  function submitToGoogleForms(confirmationType) {
+    const name = sessionStorage.getItem('guestName') || '';
+    const email = sessionStorage.getItem('guestEmail') || '';
+    const formUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSdkNG95MiZde3FcN-Yw532CtfIIrlLvq1Ql6tJk7N1lWfWLdg/formResponse';
+    const data = new FormData();
+    data.append('entry.2026509294', name);
+    data.append('entry.662148096', email);
+    data.append('entry.173674157', confirmationType);
+    fetch(formUrl, { method: 'POST', body: data, mode: 'no-cors' }).catch(() => {});
   }
 </script>
 </body>
