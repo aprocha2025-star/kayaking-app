@@ -343,11 +343,12 @@
     const btn=document.getElementById('reg-btn');
     btn.textContent='Reserving your spot...';
     btn.disabled=true;
-    fetch('/api/register',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({name,email})
-    }).catch(()=>{});
+    const res = await fetch('/api/register',{
+  method:'POST',
+  headers:{'Content-Type':'application/json'},
+  body:JSON.stringify({name,email})
+});
+if(!res.ok){alert('Registration failed. Please try again.');btn.textContent='Reserve My Spot';btn.disabled=false;return;}
     document.getElementById('reg-firstname').textContent=name.split(' ')[0];
     document.getElementById('reg-form').style.display='none';
     document.getElementById('reg-success').style.display='block';
