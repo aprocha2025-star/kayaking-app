@@ -10,13 +10,12 @@ export default async function handler(req, res) {
   }
 
   try {
-    const response = await fetch('https://script.google.com/macros/s/AKfycbwMhPk2yszqrT1uzCIdn0h8GbBJTonZ8PcqFeff7VdVRgnNzKk22hasUbNT2vTME_Uq0w/exec', {
+    await fetch('https://script.google.com/macros/s/AKfycbwMhPk2yszqrT1uzCIdn0h8GbBJTonZ8PcqFeff7VdVRgnNzKk22hasUbNT2vTME_Uq0w/exec', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, email }),
+      redirect: 'follow',
     });
-
-    const data = await response.json();
     return res.status(200).json({ success: true });
   } catch (err) {
     console.error('Error:', err);
