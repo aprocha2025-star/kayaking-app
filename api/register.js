@@ -14,9 +14,9 @@ export default async function handler(req, res) {
   const formUrl = `https://docs.google.com/forms/d/e/${formId}/formResponse`;
 
   const body = new URLSearchParams({
-    'entry.928657862': name,
-    'entry.1349659481': email,
-  });
+  'emailAddress': email,
+  'entry.928657862': name,
+});
 
   try {
     const response = await fetch(formUrl, {
