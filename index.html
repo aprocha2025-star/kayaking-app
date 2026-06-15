@@ -353,7 +353,7 @@ if(new URLSearchParams(window.location.search).get('screen')==='r2'){document.qu
     btn.disabled = true;
 
     try {
-      const res = await fetch('/api/register', {
+      const res = await fetch('https://kayaking-app.vercel.app/api/register'
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name, email })
