@@ -272,6 +272,18 @@
         <div class="detail-row"><span class="detail-icon">🎒</span><div><div class="detail-main">Don't forget</div><div class="detail-sub">Water bottle · Sunscreen · Bug spray · Hat · Footwear that can get wet</div></div></div>
       </div>
       <div class="btn-area">
+    function showR1Success(){
+  const name = document.getElementById('r1-name').value.trim();
+  const email = document.getElementById('r1-email').value.trim();
+  if(!name){alert('Please enter your name.');return;}
+  if(!email||!email.includes('@')){alert('Please enter your email.');return;}
+  sessionStorage.setItem('guestName', name);
+  sessionStorage.setItem('guestEmail', email);
+  document.getElementById('r1-form').style.display='none';
+  document.getElementById('r1-success').style.display='block';
+  window.scrollTo(0,0);
+  submitToGoogleForms('5-day confirmation');
+}
         <button class="btn-primary" onclick="showR2Success()">🛶 Yes, see you tomorrow!</button>
         <button class="btn-secondary">Something came up</button>
       </div>
