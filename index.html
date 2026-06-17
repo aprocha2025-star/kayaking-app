@@ -355,33 +355,37 @@ if(!res.ok){alert('Registration failed. Please try again.');btn.textContent='Res
     window.scrollTo(0,0);
   }
 
-  function submitR1(){
-    const name=document.getElementById('r1-name').value.trim();
-    const email=document.getElementById('r1-email').value.trim();
-    if(!name){alert('Please enter your name.');return;}
-    if(!email||!email.includes('@')){alert('Please enter your email.');return;}
-    submitToGoogle('1FAIpQLSdkNG95MiZde3FcN-Yw532CtfIIrlLvq1Ql6tJk7N1lWfWLdg',{
-      'entry.2026509294': name,
-      'entry.662148096': email
-    });
-    document.getElementById('r1-form').style.display='none';
-    document.getElementById('r1-success').style.display='block';
-    window.scrollTo(0,0);
-  }
+  async function submitR1(){
+  const name=document.getElementById('r1-name').value.trim();
+  const email=document.getElementById('r1-email').value.trim();
+  if(!name){alert('Please enter your name.');return;}
+  if(!email||!email.includes('@')){alert('Please enter your email.');return;}
+  await fetch('https://script.google.com/macros/s/AKfycbyLaroLOmDG9hiFXcLd1wZiADALyCLpSil_RWEmkf0aO1NhYEfy048Lvv7PQ5ozYMVc5w/exec',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({name,email,type:'5day'}),
+    redirect:'follow'
+  });
+  document.getElementById('r1-form').style.display='none';
+  document.getElementById('r1-success').style.display='block';
+  window.scrollTo(0,0);
+}
 
-  function submitR2(){
-    const name=document.getElementById('r2-name').value.trim();
-    const email=document.getElementById('r2-email').value.trim();
-    if(!name){alert('Please enter your name.');return;}
-    if(!email||!email.includes('@')){alert('Please enter your email.');return;}
-    submitToGoogle('1FAIpQLSe7wRrWMzeKlYDlq02AYJe6VjQtnE3rgLVKlNMrQLA9hy5dWQ',{
-      'entry.576198358': name,
-      'entry.964664655': email
-    });
-    document.getElementById('r2-form').style.display='none';
-    document.getElementById('r2-success').style.display='block';
-    window.scrollTo(0,0);
-  }
+  async function submitR2(){
+  const name=document.getElementById('r2-name').value.trim();
+  const email=document.getElementById('r2-email').value.trim();
+  if(!name){alert('Please enter your name.');return;}
+  if(!email||!email.includes('@')){alert('Please enter your email.');return;}
+  await fetch('https://script.google.com/macros/s/AKfycbyLaroLOmDG9hiFXcLd1wZiADALyCLpSil_RWEmkf0aO1NhYEfy048Lvv7PQ5ozYMVc5w/exec',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({name,email,type:'eve'}),
+    redirect:'follow'
+  });
+  document.getElementById('r2-form').style.display='none';
+  document.getElementById('r2-success').style.display='block';
+  window.scrollTo(0,0);
+}
 </script>
 </body>
 </html>
