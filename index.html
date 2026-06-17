@@ -360,7 +360,7 @@ if(!res.ok){alert('Registration failed. Please try again.');btn.textContent='Res
   const email=document.getElementById('r1-email').value.trim();
   if(!name){alert('Please enter your name.');return;}
   if(!email||!email.includes('@')){alert('Please enter your email.');return;}
-  await fetch('https://script.google.com/macros/s/AKfycbyLaroLOmDG9hiFXcLd1wZiADALyCLpSil_RWEmkf0aO1NhYEfy048Lvv7PQ5ozYMVc5w/exec',{
+  await fetch('/api/confirm',{
     method:'POST',
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({name,email,type:'5day'}),
@@ -376,7 +376,7 @@ if(!res.ok){alert('Registration failed. Please try again.');btn.textContent='Res
   const email=document.getElementById('r2-email').value.trim();
   if(!name){alert('Please enter your name.');return;}
   if(!email||!email.includes('@')){alert('Please enter your email.');return;}
-  await fetch('https://script.google.com/macros/s/AKfycbyLaroLOmDG9hiFXcLd1wZiADALyCLpSil_RWEmkf0aO1NhYEfy048Lvv7PQ5ozYMVc5w/exec',{
+  await fetch('/api/confirm',{
     method:'POST',
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({name,email,type:'eve'}),
